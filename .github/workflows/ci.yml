@@ -1,0 +1,38 @@
+name: ETL CI POC
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up JDK (for Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build ETL TAR using Gradle
+        run: |
+          chmod +x gradlew || true
+          ./gradlew build
+
+      - name: Verify TAR output
+        run: |
+          ls -lh build/dist
+          tar -tf build/dist/*.tar
+
+      - name: Build container image from TAR
+        run: |
+          docker build -t etl-component:1.0.0 .
+
+      - name: Show image details
+        run: |
+          docker images | grep etl-component
