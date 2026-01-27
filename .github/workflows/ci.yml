@@ -20,6 +20,15 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Run pre-build hook (if present)
+        run: |
+          if [ -f ci/pre-build.sh ]; then
+            echo "Pre-build script found. Executing..."
+            ./ci/pre-build.sh
+          else
+            echo "No pre-build script found. Skipping."
+          fi
+
       - name: Build ETL TAR
         run: |
           chmod +x gradlew || true
