@@ -69,6 +69,15 @@ jobs:
           ls -lh build/dist
           tar -tf build/dist/*.tar
 
+      - name: Post-build validation and metadata
+        run: |
+          ./ci/post-build.sh
+        env:
+          ARTIFACT_PATH: build/abinitio-component.tar.gz
+          COMPONENT_NAME: abinitio-etl-poc
+          VERSION: 0.1.0
+
+
       - name: Build container image from TAR
         run: |
           docker build -t etl-component:1.0.0 .
