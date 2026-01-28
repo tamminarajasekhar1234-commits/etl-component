@@ -3,9 +3,9 @@ set -euo pipefail
 
 echo "▶ Running post-build validation"
 
-ARTIFACT_PATH=${ARTIFACT_PATH:-build/abinitio-component.tar.gz}
-COMPONENT_NAME=${COMPONENT_NAME:-abinitio-etl-component}
-VERSION=${VERSION:-0.1.0}
+ARTIFACT_PATH=${ARTIFACT_PATH}
+COMPONENT_NAME=${COMPONENT_NAME}
+VERSION=${VERSION}
 
 # 1. Validate artifact exists
 if [ ! -f "$ARTIFACT_PATH" ]; then
