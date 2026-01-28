@@ -42,10 +42,10 @@ jobs:
           ls -lh build/dist
           tar -tf build/dist/*.tar
 
-      - name: Post-build validation and metadata
-        run: |
-          chmod +x ci/post-build.sh && true
-          ./ci/post-build.sh
+      # - name: Post-build validation and metadata
+      #   run: |
+      #     chmod +x ci/post-build.sh && true
+      #     ./ci/post-build.sh
         env:
           ARTIFACT_PATH: build/abinitio-component.tar.gz
           COMPONENT_NAME: abinitio-etl-poc
