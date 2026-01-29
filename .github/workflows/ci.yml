@@ -81,7 +81,7 @@ jobs:
 
       - name: Build container image from TAR
         run: |
-          docker build -t etl-component:1.0.0 .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/poc:etl-component:1.0.0 .
 
       - name: Show image details
         run: |
@@ -91,10 +91,10 @@ jobs:
             echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login \
             -u "${{ secrets.DOCKERHUB_USERNAME }}" \
             --password-stdin
-      - name: Tag Docker image
-        run: |
-           docker tag etl-component:1.0.0 \
-           ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:1.0.0
+      # - name: Tag Docker image
+      #   run: |
+      #      docker tag etl-component:1.0.0 \
+      #      ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:1.0.0
       - name: Push image to Docker Hub
         run: |
              docker push ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:1.0.0
