@@ -82,6 +82,11 @@ jobs:
       - name: Build container image from TAR
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:${{github.sha}} .
+
+      - name: Show image details
+        run: |
+          docker images | grep etl-component
+          
       - name: Run container
         run: |
             docker run -d \
@@ -90,9 +95,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:${{ github.sha }}
 
 
-      - name: Show image details
-        run: |
-          docker images | grep etl-component
+
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
