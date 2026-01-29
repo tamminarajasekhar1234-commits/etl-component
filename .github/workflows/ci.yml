@@ -81,7 +81,7 @@ jobs:
 
       - name: Build container image from TAR
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/poc:etl-component:${{github.sha}} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/etl-component:${{github.sha}} .
 
       - name: Show image details
         run: |
